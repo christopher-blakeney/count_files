@@ -1,0 +1,29 @@
+import os
+import sys
+import re
+
+__author__ = "Christopher J. Blakeney"
+__version__ = "0.1.0"
+__license__ = ""
+
+def count_files(path):
+    n = 0
+    for dirpath, dirname, filenames in os.walk(path):
+        c = len(filenames)
+        n += c
+        print(dirpath, c)
+    print('Total: ', n)
+
+def main():
+    usage = '\nReturn summary count of given directory.\nUsage: count_files.py [path]\n'
+    if len(sys.argv) != 2:
+        print(usage)
+    elif not os.path.isdir(sys.argv[1]):
+        print('\nInvalid path!\n')
+    else:
+        path = sys.argv[1]
+        count_files(path)
+
+if __name__ == "__main__":
+  #This is executed when run from the command line
+  main()
