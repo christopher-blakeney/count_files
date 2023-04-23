@@ -1,5 +1,7 @@
 import os
 import re
+import argparse
+from pathlib import Path
 
 __author__ = "Christopher J. Blakeney"
 __version__ = "0.1.0"
@@ -47,20 +49,19 @@ def count_files(path, exclude_hidden=False, show_files=True):
 
 
 def main():
-    # replace with path to be counted
-    path = "/Users/christopher/Desktop/Peter Mac/Penny Ad Hoc/Pubs_found/Penny_pubs"
-    count_files(path)
+    # CLI
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path")
+    parser.add_argument("-e", "--excludeHidden", action="store_true")
+    parser.add_argument("-s", "--showFilenames", action="store_true")
+    args = parser.parse_args()
+    target_dir = Path(args.path)
 
-    """
-    usage = '\nReturn summary count of given directory.\nUsage: count_files.py [path]\n'
-    if len(sys.argv) != 2:
-        print(usage)
-    elif not os.path.isdir(sys.argv[1]):
-        print('\nInvalid path!\n')
-    else:
-        path = sys.argv[1]
-        count_files(path)
-    """
+    if not target_dir.exists():
+        print("The target directory doesn't exist")
+        raise SystemExit(1)
+
+    count_files(target_dir)
 
 
 if __name__ == "__main__":
