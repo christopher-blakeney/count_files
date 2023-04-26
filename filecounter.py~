@@ -50,7 +50,11 @@ def count_files(path, exclude_hidden=False, show_files=True):
 
 def main():
     # CLI
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="filecounter",
+        description="Count the files within a directory",
+        epilog="Thanks for using filecounter... Developed by Chris Blakeney",
+    )
     parser.add_argument("path")
     parser.add_argument("-e", "--excludeHidden", action="store_true")
     parser.add_argument("-s", "--showFilenames", action="store_true")
