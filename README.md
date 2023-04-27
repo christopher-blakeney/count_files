@@ -4,7 +4,7 @@ A program to tally parent/child files in a directory.
 >This program was created for academic/research workflows that require counting files within complicated folder structures. For more information please see the program's acompanying blog post.
 
 ## Help message
-Running `filecounter.py -h` will show the following message. The -f and -d flags added before the path will add additional information to the general output. Below are some common use cases.
+Running `filecounter.py -h` will show the following message. The -f and -d flags added before the path will add additional information to the general output.
 
 ```
 optional arguments:
