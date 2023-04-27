@@ -20,7 +20,7 @@ def count_files(detail, path, show_hidden, show_files):
                 t_hidden_files += 1
 
         # if show hidden false, subtract files and dirs beginning with "." from the filenames and dirname list
-        if show_hidden == False:
+        if show_hidden is False:
             for f in filenames:
                 filenames = [f for f in filenames if not f[0] == "."]
 
@@ -42,6 +42,7 @@ def count_files(detail, path, show_hidden, show_files):
     print(
         f"\nTOTAL: {n} real files | {t_hidden_files} hidden | {n + t_hidden_files} total\n"
     )
+    raise SystemExit(2)
 
 
 def main():
@@ -63,7 +64,7 @@ def main():
         "--subdircount",
         action="store_true",
         default=False,
-        help="show totals for each subdirectory within path",
+        help="list totals for each directory within path",
     )
 
     # add show filenames option
@@ -72,7 +73,7 @@ def main():
         "--showfilenames",
         action="store_true",
         default=False,
-        help="show files within given path",
+        help="list files within given path",
     )
 
     # set args and target dir to input path
@@ -87,32 +88,43 @@ def main():
     detail_flag = args.subdircount
     show_hidden = True
 
-    # deal with large numbers so output isn't infinite
     file_count = 0
     sub_dir_count = 0
+
     for dirpath, dirname, filenames in os.walk(target_dir):
-        # if directory contains over 100 files and -f flag is selected, double check before proceeding
         file_count += len(filenames)
         sub_dir_count += len(dirname)
+
+    # deal with large numbers so output isn't infinite
+    for dirpath, dirname, filenames in os.walk(target_dir):
+        # if directory contains over 100 files and -f flag is selected, double check before proceeding
         if filenames_flag == True and file_count > 100:
             response = input(
-                f"Directory and its children contain {file_count} files, are you sure you want to list them? (y/n): "
+                f"Directory and its children contain 100+ files, are you sure you want to list them? (y/n): "
             )
             if response in ("y", "Y", "Yes", "yes", "YES"):
                 # call program function
                 count_files(detail_flag, target_dir, show_hidden, filenames_flag)
+                raise SystemExit(2)
             else:
                 raise SystemExit(1)
         # if directory contains over 25 subdirs and -d is selected, double check before proceeding
-        elif detail_flag == True and sub_dir_count > 25:
+        elif detail_flag == True and sub_dir_count > 15:
             response = input(
-                f"Directory contains {sub_dir_count} subdirectories, are you sure you want a detailed summary? (y/n): "
+                f"Directory contains 15+ subdirectories, are you sure you want a detailed summary? (y/n): "
             )
             if response in ("y", "Y", "Yes", "yes", "YES"):
                 # call program function
                 count_files(detail_flag, target_dir, show_hidden, filenames_flag)
+                raise SystemExit(2)
             else:
                 raise SystemExit(1)
+        elif detail_flag == False and filenames_flag == False:
+            count_files(detail_flag, target_dir, show_hidden, filenames_flag)
+            raise SystemExit(2)
+        elif filenames_flag and file_count < 100 or detail_flag and sub_dir_count < 15:
+            # count_files(detail_flag, target_dir, show_hidden, filenames_flag)
+            print("Hey")
 
 
 if __name__ == "__main__":
