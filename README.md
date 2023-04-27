@@ -29,29 +29,35 @@ detailed output:
 **Use case**: see file count for each subfolder within a directory 
 - To get a summary of all subdirectories as well, add the `-d` flag before the path. This can also be used with the above-mentioned `-f` flag.
 
-below is a simple example with a low file count...
+below is a simple example with a low file count... Please be aware that if files within the specified path surpass 100, or if the child directories within the specified path surpass 15, you will be asked to confirm that you want to print out a detailed summary or list the files.
 
+
+#### navigate to filecounter.py file
+`cd /Users/User_1/Desktop/Programs/`
+
+#### run general output on chosen path
+`python3 filecounter.py /Users/User_1/Desktop/Neuro_Lit_Review_2023`
+
+#### output
+`> 13 real | 2 hidden | 15 total files`
+
+#### run detailed output
+`python3 filecounter.py -d /Users/User_1/Desktop/Neuro_Lit_Review_2023`
+
+#### output
 ```
-# navigate to filecounter.py file
-cd /Users/User_1/Desktop/Programs/
-
-# run general output on chosen path
-python3 filecounter.py /Users/User_1/Desktop/Neuro_Lit_Review_2023
-# output
-> 13 real | 2 hidden | 15 total files
-
-# run detailed output
-python3 filecounter.py -d /Users/User_1/Desktop/Neuro_Lit_Review_2023
-# output
 PATH: /Users/User_1/Desktop/Neuro_Lit_Review_2023/Donald_et_al
 >> 6 real | 1 hidden | 7 total files
 PATH: /Users/User_1/Desktop/Neuro_Lit_Review_2023/Kirksgaad_et_al
 >> 7 real | 1 hidden | 8 total files
-> 13 real | 2 hidden | 15 total files
 
-# run detailed report and list files
-python3 filecounter.py -d -f /Users/User_1/Desktop/Neuro_Lit_Review_2023
-# output
+> 13 real | 2 hidden | 15 total files
+```
+#### run detailed report and list files
+`python3 filecounter.py -d -f /Users/User_1/Desktop/Neuro_Lit_Review_2023`
+
+#### output
+```
 PATH: /Users/User_1/Desktop/Neuro_Lit_Review_2023/Donald_et_al
 >> 6 real | 1 hidden | 7 total files
   - Donald_et_al_2002_Glia.pdf
