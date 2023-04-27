@@ -37,7 +37,9 @@ below is a simple example with a low file count... Please be aware that if files
 
 #### run general output on chosen path
 `python3 filecounter.py /Users/User_1/Desktop/Neuro_Lit_Review_2023`
-output: `> 13 real | 2 hidden | 15 total files`
+
+#### output
+`> 13 real | 2 hidden | 15 total files`
 
 #### run detailed output
 `python3 filecounter.py -d /Users/User_1/Desktop/Neuro_Lit_Review_2023`
