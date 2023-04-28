@@ -1,5 +1,5 @@
 # filecounter
-A program to tally parent/child files in a directory.
+A program to tally parent/child files in a directory. Dependencies: os, argparse, Path from pathlib
 
 >This program was created for academic/research workflows that require counting files within complicated folder structures. For more information please see the program's acompanying blog post.
 
